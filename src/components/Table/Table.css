@@ -1,0 +1,65 @@
+.tableHeader {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    padding: 20px;
+    gap: 10px;
+    font-size: small;
+}
+
+
+.table {
+    /* display: list-item;
+    justify-content: space-between; */
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    padding: 20px;
+    gap: 10px;
+    font-size: small;
+    cursor: pointer;
+}
+
+.button {
+    color: inherit;
+    border: 2px solid transparent;
+    border-radius: 50px;
+    padding: 4px 8px;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+    transition: transform 0.25s;
+}
+.button:hover {
+    cursor: pointer;
+    transform: translateY(-0.25em);
+    box-shadow: 0 0.5em 0.5em -0.4em rgb(74, 74, 74);
+    color: white;
+}
+
+.button:active {
+    color: black;
+}
+
+.tablerowCell {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 10px;
+    vertical-align: center;
+}
+
+.modal-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background-color: rgba(32, 32, 32, 0.4);
+}
+
+.tablerowCell-number{
+    text-align: center;
+}
