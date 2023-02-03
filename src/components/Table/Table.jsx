@@ -1,11 +1,11 @@
 import './Table.css';
 import React, { useEffect, useState } from 'react'
-import axios from 'axios';
 import Modal from './components/Modal';
 import { useDispatch, useSelector } from 'react-redux';
 import { openModalAction, currentItemAction } from '../../redux/actions/actions';
 import { FaRegCheckCircle } from "react-icons/fa";
 import { FaRegWindowClose } from "react-icons/fa";
+import axios from 'axios';
 // import { useQuery } from 'react-query';
 
 // async function getData() {
@@ -44,7 +44,6 @@ const Table = () => {
     const handleModal = (itemInfo) => {
       dispatch(openModalAction())
       dispatch(currentItemAction(itemInfo))
-      console.log(itemInfo)
     }
   return (
     <div className='tableContainer'>

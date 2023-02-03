@@ -114,3 +114,7 @@ input[type=number], input[type=radio], label {
     color: red;
     font-weight: 800;
 }
+
+.redCross:hover {
+    cursor: pointer;
+}

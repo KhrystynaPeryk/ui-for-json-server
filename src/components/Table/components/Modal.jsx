@@ -11,6 +11,10 @@ const Modal = () => {
         dispatch(closeModalAction())
     }
 
+    const handleDeleteEmail = (id) => {
+        console.log('deleting', id)
+    }
+
     const submitItem = (e) => {
         e.preventDefault()
         console.log('submitting an item')
@@ -34,7 +38,7 @@ const Modal = () => {
                 <div>Team email(s):   </div>
                 <div className='emailBox-wrapper'>
                     {currentItem.info.team_email.map((email, index) => {
-                        return <div key={index} className='email-box'>{email} <span className='redCross'>×</span></div>
+                        return <div key={index} className='email-box'>{email} <span className='redCross' onClick={() => handleDeleteEmail(index)}>×</span></div>
                     })}
                 </div>
                 <div className='input-container'>Enter a new team email: 
