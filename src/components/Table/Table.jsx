@@ -31,7 +31,6 @@ const Table = () => {
 
     const dispatch = useDispatch();
     const modal = useSelector((state) => state.isModalOpen);
-    console.log(modal)
 
     useEffect(() => {
         axios.get(`http://localhost:3001/dashboard`).then((res) => {
@@ -39,7 +38,6 @@ const Table = () => {
           setData(Object.entries((res.data)));
           console.log(Object.entries(res.data));
           console.log('data length', data.length);
-          console.log(data);
         })
     }, [])
 
@@ -52,15 +50,15 @@ const Table = () => {
     <div className='tableContainer'>
       <div className='table'>
         <div className='tableHeader'>
-          <div className='tableCell'>Workspace Name</div>
-          <div className='tableCell'>Email on error</div>
-          <div className='tableCell'>Email on success</div>
-          <div className='tableCell'>Email on discarded</div>
-          <div className='tableCell'>Apply on success</div>
-          <div className='tableCell'>Email on apply</div>
-          <div className='tableCell'>Apply destroys tolerance</div>
-          <div className='tableCell'>Apply changes tolerance</div>
-          <div className='tableCell'>Email/s</div>
+          <div>Workspace Name</div>
+          <div>Email on error</div>
+          <div>Email on success</div>
+          <div>Email on discarded</div>
+          <div>Apply on success</div>
+          <div>Email on apply</div>
+          <div>Apply destroys tolerance</div>
+          <div>Apply changes tolerance</div>
+          <div>Email/s</div>
         </div>
             {data.map((item) => {
               const itemName = item[0];
@@ -76,9 +74,10 @@ const Table = () => {
                 team_email,
                 workspace_id
               } = itemInfo;
+
+              const currentItem = {name: itemName, info: itemInfo}
               return (
-                // change below to handleModal(workspace_id)
-                <div className='tableRow' key={workspace_id} onDoubleClick={() => handleModal(itemInfo)} >
+                <div className='tableRow' key={workspace_id} onDoubleClick={() => handleModal(currentItem)} >
                   <div className='tableCell'>{itemName}</div>
                   <div className='tableCell'>
                     {email_on_error === 'yes' ? <div className='checkedIcon'><FaRegCheckCircle /></div> : <div className='crossIcon'><FaRegWindowClose /></div>}
@@ -101,7 +100,7 @@ const Table = () => {
                   <div className='tableCell'>
                     {apply_changes_tolerance}
                   </div>
-                  <div className='tableCell'>
+                  <div className='tableCell-email'>
                     {team_email.map((email, index) => {
                       return (
                         <div key={index}>{email}</div>

@@ -1,8 +1,17 @@
 .modal-wrapper {
     padding: 2em;
     background-color: white;
-    height: 400px;
+    height: 450px;
     width: 600px;
+}
+
+.modalHeader {
+    display: flex;
+    justify-content: space-between;
+}
+
+.closeModalCross {
+    cursor: pointer;
 }
 
 .infoItems {
@@ -12,10 +21,10 @@
 .input-container {
     margin-top: 0.5em;
 }
-
+/* 
 .radioItems-container {
     width: 80%;
-}
+} */
 
 .modalItem{
     margin-top: 0.5em;
@@ -59,13 +68,38 @@
     color: black;
 }
 
-input[type=number] {
-    width: 40px;
+input[type='email'] {
+    border: 1px solid black;
     border-radius: 50px;
+    width: 65%;
+    outline: none;
+    margin-left: 0.5em;
+    padding: 0 10px;
+}
+
+input[type=number] {
+    border: 1px solid black;
+    width: 55px;
+    border-radius: 50px;
+    padding: 0 10px;
 }
 
 input[type=number], input[type=radio], label {
     cursor: pointer;
+    outline: none;
+}
+
+.emailBox-wrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 100%;
+    height: 45px;
+    overflow-y: scroll;
+    box-sizing: border-box;
+    margin-top: 0.5em;
 }
 
 .email-box {
@@ -73,14 +107,10 @@ input[type=number], input[type=radio], label {
     border-radius: 50px;
     padding-left: 5px;
     padding-right: 5px;
+    margin-right: 10px;
 }
 
 .redCross {
     color: red;
     font-weight: 800;
-}
-
-input[type='email'] {
-    border-radius: 50px;
-    width: 20em;
 }
