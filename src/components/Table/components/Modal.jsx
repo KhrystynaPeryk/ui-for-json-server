@@ -23,12 +23,14 @@ const Modal = () => {
                 <div className='closeModalCross' onClick={() => closeModal()}>&#10005;</div>
             </div>
             <div className='infoItems'>
-                Workspace name: <b>{currentItem.name}</b>
+                <div>Workspace name:</div>
+                <b>{currentItem.name}</b>
             </div>
             <div className='infoItems'>
-                ID: <b>{currentItem.info.workspace_id}</b>
+                <div>ID:</div>
+                <b>{currentItem.info.workspace_id}</b>
             </div>
-            <div className='infoItems'>
+            <div className='emailContainer'>
                 <div>Team email(s):   </div>
                 <div className='emailBox-wrapper'>
                     {currentItem.info.team_email.map((email, index) => {
