@@ -2,10 +2,11 @@ import './Table.css';
 import React, { useEffect, useState } from 'react'
 import Modal from './components/Modal';
 import { useDispatch, useSelector } from 'react-redux';
-import { openModalAction, currentItemAction } from '../../redux/actions/actions';
+import { openModalAction, currentItemAction, fetchAllData } from '../../redux/actions/actions';
 import { FaRegCheckCircle } from "react-icons/fa";
 import { FaRegWindowClose } from "react-icons/fa";
 import axios from 'axios';
+import { v4 as uuidv4 } from 'uuid';
 // import { useQuery } from 'react-query';
 
 // async function getData() {
@@ -31,15 +32,31 @@ const Table = () => {
 
     const dispatch = useDispatch();
     const modal = useSelector((state) => state.isModalOpen);
+    // const storeData = useSelector((state) => state.getAllData.data);
 
     useEffect(() => {
-        axios.get(`http://localhost:3001/dashboard`).then((res) => {
-          console.log(res.data, typeof res.data)
-          setData(Object.entries((res.data)));
-          console.log(Object.entries(res.data));
-          console.log('data length', data.length);
+      axios.get(`http://localhost:3001/dashboard`).then((res) => {
+        console.log(res.data, typeof res.data)
+        const objToArrayData = Object.entries((res.data));
+
+        const modifiedData = objToArrayData.map((item) => {
+          const info = item[1]
+          const teamEmailsWithIDs = info.team_email.map((email) => {
+            return email = {email: email, id: uuidv4()}
+          });
+          info.team_email = teamEmailsWithIDs;
+          return item;
         })
-    }, [])
+
+        console.log(Object.entries(res.data));
+        console.log(modifiedData)
+        setData(modifiedData);
+        // setData(Object.entries((res.data)));
+      })
+      // dispatch(fetchAllData()).then(() => {
+      //   setData(storeData)
+      // })
+			}, []);
 
     const handleModal = (itemInfo) => {
       dispatch(openModalAction())
@@ -100,9 +117,9 @@ const Table = () => {
                     {apply_changes_tolerance}
                   </div>
                   <div className='tableCell-email'>
-                    {team_email.map((email, index) => {
+                    {team_email.map((email) => {
                       return (
-                        <div key={index}>{email}</div>
+                        <div key={email.id}>{email.email}</div>
                       )
                     })}
                   </div>

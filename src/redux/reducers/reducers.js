@@ -17,49 +17,30 @@ export function getCurrentItem(state = {}, action) {
     switch (type) {
         case CURRENT_ITEM:
             return payload;
+        // case DELETE_EMAIL:
+        //     const emailIdToDelete = payload;
+        //     const emailArray = state.info.team_email
+        //     emailArray.splice(emailIdToDelete, 1)
+        //     console.log(emailIdToDelete)
+        //     console.log(state)
+		// 	return {
+		// 		...state,
+		// 		info: emailArray,
+		// 	};
         default:
             return state;
   }
 }
 
-export function getAllData(state = [], action) {
-    const { type, payload } = action;
-    switch (type) {
-        case FETCH_ALL_DATA:
-            return {
-                ...state,
-                data: payload
-            }
-        default:
-            return state;
-    }
-}
-
-
-// export function fetchProducts(state = {
-//   products: [],
-//   category: '',
-//   }, action) {
-//     switch (action.type) {
-//       case FETCH_PRODUCTS_ALL:
-//         return {
-//           ...state,
-//           products: action.payload,
-//           category: 'all',
-//         }
-//       case FETCH_PRODUCTS_TECH:
-//         return {
-//           ...state,
-//           products: action.payload,
-//           category: 'tech'
-//         }
-//       case FETCH_PRODUCTS_CLOTHES:
-//         return {
-//           ...state,
-//           products: action.payload,
-//           category: 'clothes'
-//         }
+// export function getAllData(state = [], action) {
+//     const { type, payload } = action;
+//     switch (type) {
+//         case FETCH_ALL_DATA:
+//             return {
+//                 ...state,
+//                 data: payload
+//             }
 //         default:
-//           return state;
+//             return state;
 //     }
 // }

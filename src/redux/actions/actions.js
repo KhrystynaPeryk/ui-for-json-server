@@ -1,5 +1,5 @@
 import { OPEN_MODAL, CLOSE_MODAL, CURRENT_ITEM, FETCH_ALL_DATA } from "./types";
-import axios from 'axios';
+// import axios from 'axios';
 
 export const openModalAction = () => (dispatch) => {
 	return dispatch({
@@ -20,17 +20,15 @@ export const currentItemAction = (objItem) => (dispatch) => {
     })
 }
 
-export const fetchAllDataAction = (data) => (dispatch) => {
-    return dispatch({
-        type: FETCH_ALL_DATA,
-        payload: data 
-    })
-}
+// export const fetchAllDataAction = (data) => (dispatch) => {
+//     return dispatch({
+//         type: FETCH_ALL_DATA,
+//         payload: data
+//     })
+// }
 
-export function fetchAllData() {
-    return (dispatch) => {
-        axios.get(`http://localhost:3001/dashboard`).then((res) => {
-        dispatch(fetchAllDataAction(Object.entries((res.data))));
-        })
-    };
-}
+// export const fetchAllData = () => (dispatch) => {
+//     return axios.get(`http://localhost:3001/dashboard`).then((res) => {
+//         dispatch(fetchAllDataAction(Object.entries((res.data))));
+//     })
+// }

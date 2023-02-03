@@ -3,7 +3,7 @@ import { isModalOpen, getCurrentItem } from './reducers';
 
 const rootReducer = combineReducers({
 	isModalOpen,
-    getCurrentItem
+    getCurrentItem,
 });
 
 export default rootReducer;
