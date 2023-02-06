@@ -193,11 +193,11 @@ const Modal = () => {
             </div>
             <div className='modalItem'>
                 <label htmlFor='apply_destroys_tolerance'>apply_destroys_tolerance </label>
-                <input type='number' id='apply_destroys_tolerance' name='apply_destroys_tolerance' value={applyDestroysTolerance} onChange={handleDestroysChange} />
+                <input type='number' id='apply_destroys_tolerance' name='apply_destroys_tolerance' value={applyDestroysTolerance || ''} onChange={handleDestroysChange} />
             </div>
             <div className='modalItem'>
                 <label htmlFor='apply_changes_tolerance'>apply_changes_tolerance </label>
-                <input type='number' id='apply_changes_tolerance' name='apply_changes_tolerance' value={applyChangesTolerance} onChange={handleChangesChange} />
+                <input type='number' id='apply_changes_tolerance' name='apply_changes_tolerance' value={applyChangesTolerance || ''} onChange={handleChangesChange} />
             </div> 
             </div>
             <div className='btn-container'>
