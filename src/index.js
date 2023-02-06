@@ -11,13 +11,13 @@ import store from './redux/store/configureStore';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    {/* <QueryClientProvider client={queryClient}> */}
+  // <React.StrictMode>
+  //   <QueryClientProvider client={queryClient}>
     <Provider store={store}>
       <App />
     </Provider>
-    {/* </QueryClientProvider> */}
-  </React.StrictMode>
+  //   </QueryClientProvider>
+  // </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function

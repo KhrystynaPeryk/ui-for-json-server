@@ -1,4 +1,4 @@
-import { OPEN_MODAL, CLOSE_MODAL, CURRENT_ITEM, FETCH_ALL_DATA } from '../actions/types';
+import { OPEN_MODAL, CLOSE_MODAL, CURRENT_ITEM, FETCH_ALL_DATA, DATA_UPDATE } from '../actions/types';
 
 export function isModalOpen(state = false, action) {
     const { type } = action;
@@ -16,31 +16,34 @@ export function getCurrentItem(state = {}, action) {
     const { type, payload } = action;
     switch (type) {
         case CURRENT_ITEM:
-            return payload;
-        // case DELETE_EMAIL:
-        //     const emailIdToDelete = payload;
-        //     const emailArray = state.info.team_email
-        //     emailArray.splice(emailIdToDelete, 1)
-        //     console.log(emailIdToDelete)
-        //     console.log(state)
-		// 	return {
-		// 		...state,
-		// 		info: emailArray,
-		// 	};
+            return {
+                ...state,
+                ...payload
+            };
         default:
             return state;
   }
 }
 
-// export function getAllData(state = [], action) {
-//     const { type, payload } = action;
-//     switch (type) {
-//         case FETCH_ALL_DATA:
-//             return {
-//                 ...state,
-//                 data: payload
-//             }
-//         default:
-//             return state;
-//     }
-// }
+export function getAllData(state = [], action) {
+    const { type, payload } = action;
+    switch (type) {
+        case FETCH_ALL_DATA:
+            return [
+                ...state,
+                ...payload
+            ];
+        case DATA_UPDATE:
+            const updatedData = state.map((dataArrItem) => {
+                if (dataArrItem[1].workspace_id === payload.info.workspace_id)
+                dataArrItem[1] = payload.info;
+                return dataArrItem;
+            })
+            console.log(updatedData)
+            return [
+                ...updatedData
+            ]
+        default:
+            return state;
+    }
+}

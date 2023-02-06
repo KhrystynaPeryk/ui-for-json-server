@@ -2,7 +2,7 @@ import './Table.css';
 import React, { useEffect, useState } from 'react'
 import Modal from './components/Modal';
 import { useDispatch, useSelector } from 'react-redux';
-import { openModalAction, currentItemAction, fetchAllData } from '../../redux/actions/actions';
+import { openModalAction, currentItemAction, fetchAllDataAction } from '../../redux/actions/actions';
 import { FaRegCheckCircle } from "react-icons/fa";
 import { FaRegWindowClose } from "react-icons/fa";
 import axios from 'axios';
@@ -28,40 +28,48 @@ import { v4 as uuidv4 } from 'uuid';
 // }
 
 const Table = () => {
-    const [data, setData] = useState([]);
+  const [data, setData] = useState([]);
 
-    const dispatch = useDispatch();
-    const modal = useSelector((state) => state.isModalOpen);
-    // const storeData = useSelector((state) => state.getAllData.data);
+  const dispatch = useDispatch();
+  const modal = useSelector((state) => state.isModalOpen);
 
-    useEffect(() => {
-      axios.get(`http://localhost:3001/dashboard`).then((res) => {
-        console.log(res.data, typeof res.data)
-        const objToArrayData = Object.entries((res.data));
+  //https://www.tutorialspoint.com/how-to-update-parent-state-in-reactjs#:~:text=To%20update%20the%20parent%20state%20from%20the%20children%20component%2C%20either,children%20and%20handling%20it%20accordingly.
+  // if there is an updated current Item from Modal, we need to update it in the table too
+  // if (Object.keys(currentItemData).length !== 0 && currentItemData.updated) {
+  //   console.log('FROM UPDATING TABLE FUNCTION: updatedItem', currentItemData)
+  //   console.log('FROM UPDATING TABLE FUNCTION: Data', data)
+  //   const updatedData = data.map((dataArrItem) => {
+  //     if (dataArrItem[1].workspace_id === currentItemData.info.workspace_id)
+  //     dataArrItem[1] = currentItemData.info;
+  //     return dataArrItem;
+  //   })
+  //   console.log(updatedData)
+  //   setData((prev) => [...prev, updatedData]);
+  //   dispatch(currentItemRemoveAction());
+  // }
 
-        const modifiedData = objToArrayData.map((item) => {
-          const info = item[1]
-          const teamEmailsWithIDs = info.team_email.map((email) => {
-            return email = {email: email, id: uuidv4()}
-          });
-          info.team_email = teamEmailsWithIDs;
-          return item;
-        })
+  useEffect(() => {
+    axios.get(`http://localhost:3001/dashboard`).then((res) => {
+      console.log(res.data, typeof res.data)
+      const objToArrayData = Object.entries((res.data));
 
-        console.log(Object.entries(res.data));
-        console.log(modifiedData)
-        setData(modifiedData);
-        // setData(Object.entries((res.data)));
+      const modifiedData = objToArrayData.map((item) => {
+        const info = item[1]
+        const teamEmailsWithIDs = info.team_email.map((email) => {
+          return email = {email: email, id: uuidv4()}
+        });
+        info.team_email = teamEmailsWithIDs;
+        return item;
       })
-      // dispatch(fetchAllData()).then(() => {
-      //   setData(storeData)
-      // })
-			}, []);
+      setData(modifiedData);
+      dispatch(fetchAllDataAction(modifiedData));
+    })
+  }, [dispatch]);
 
-    const handleModal = (itemInfo) => {
-      dispatch(openModalAction())
-      dispatch(currentItemAction(itemInfo))
-    }
+  const handleModal = (itemInfo) => {
+    dispatch(openModalAction())
+    dispatch(currentItemAction(itemInfo))
+  }
   return (
     <div className='tableContainer'>
       <div className='table'>
