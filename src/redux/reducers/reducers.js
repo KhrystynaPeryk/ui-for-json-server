@@ -39,7 +39,6 @@ export function getAllData(state = [], action) {
                 dataArrItem[1] = payload.info;
                 return dataArrItem;
             })
-            console.log(updatedData)
             return [
                 ...updatedData
             ]

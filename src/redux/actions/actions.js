@@ -12,6 +12,7 @@ export const closeModalAction = () => (dispatch) => {
     })
 }
 
+// storing a current item when you open Modal
 export const currentItemAction = (objItem) => (dispatch) => {
     return dispatch({
         type: CURRENT_ITEM,
@@ -19,6 +20,7 @@ export const currentItemAction = (objItem) => (dispatch) => {
     })
 }
 
+// storing all data in a store on page load
 export const fetchAllDataAction = (data) => (dispatch) => {
     return dispatch({
         type: FETCH_ALL_DATA,
@@ -26,6 +28,7 @@ export const fetchAllDataAction = (data) => (dispatch) => {
     })
 }
 
+//when you edit the current item and click save, this action changes this item in a table
 export const dataUpdateAction = (objItem) => (dispatch) => {
     return dispatch({
         type: DATA_UPDATE,

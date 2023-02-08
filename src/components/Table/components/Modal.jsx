@@ -3,7 +3,8 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { closeModalAction, dataUpdateAction } from '../../../redux/actions/actions';
 import { v4 as uuidv4 } from 'uuid';
-import { isEqual } from 'lodash';
+import { isEqual, cloneDeep } from 'lodash';
+import axios from 'axios';
 
 const Modal = () => {
     const dispatch = useDispatch();
@@ -52,6 +53,7 @@ const Modal = () => {
         //email validation regex
         if (/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(newEmail)) {
             setIsEmailValid(true);
+            //adding id to a new email
             const emailObjWithId = {email: newEmail, id: uuidv4()};
             setTeamEmails((prev) => [...prev, emailObjWithId]);
             setEmailInputValue('');
@@ -107,16 +109,27 @@ const Modal = () => {
                 apply_destroys_tolerance: applyDestroysTolerance
             }
         }
-        if (isEqual(propsSnapshot ,objToSubmit)) { //equal - no need to do json file update
+        if (isEqual(propsSnapshot ,objToSubmit)) { //equal - no need to update json file
             dispatch(closeModalAction());
         } else {
-            dispatch(dataUpdateAction(objToSubmit))
+            dispatch(dataUpdateAction(objToSubmit));
+            const cloneObject = cloneDeep(objToSubmit);
+            //removing ids from team_emails
+            cloneObject.info.team_email = cloneObject.info.team_email.map((email) => {
+                return email.email;
+            })
+            const modifiedCloneObj = {[cloneObject.name] : cloneObject.info};
+            console.log('objToSubmit', objToSubmit)
+            console.log('modifiedCloneObj', modifiedCloneObj)
+
+            // axios.put(`http://localhost:3001/dashboard/update`, modifiedCloneObj).then()
+            // dispatch(sendItemToJsonAction(objToSubmit))
             dispatch(closeModalAction());
         }
-        console.log(' ------ submitting an item ------ ');
-        console.log('INITIAL OBJECT', propsSnapshot)
-        console.log('UPDATED OBJECT', objToSubmit)
-        console.log('are Objects the same?', isEqual(propsSnapshot ,objToSubmit))
+        // console.log(' ------ submitting an item ------ ');
+        // console.log('INITIAL OBJECT', propsSnapshot)
+        // console.log('UPDATED OBJECT', objToSubmit)
+        // console.log('are Objects the same?', isEqual(propsSnapshot ,objToSubmit))
     }
     // html return
     return (

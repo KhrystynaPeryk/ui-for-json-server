@@ -50,9 +50,9 @@ const Table = () => {
 
   useEffect(() => {
     axios.get(`http://localhost:3001/dashboard`).then((res) => {
-      console.log(res.data, typeof res.data)
       const objToArrayData = Object.entries((res.data));
 
+      //modifying data: namely team_emails - adding ids to them (to be able to manipulate them in an array)
       const modifiedData = objToArrayData.map((item) => {
         const info = item[1]
         const teamEmailsWithIDs = info.team_email.map((email) => {
