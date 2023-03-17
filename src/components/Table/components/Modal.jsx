@@ -121,15 +121,15 @@ const Modal = () => {
             const modifiedCloneObj = {[cloneObject.name] : cloneObject.info};
             console.log('objToSubmit', objToSubmit)
             console.log('modifiedCloneObj', modifiedCloneObj)
-
-            // axios.put(`http://localhost:3001/dashboard/update`, modifiedCloneObj).then()
-            // dispatch(sendItemToJsonAction(objToSubmit))
+            axios.post(`http://localhost:3001/dashboard/update`, modifiedCloneObj)
+                .then(
+                    console.log('updated item has been stored in the database')
+                )
+                .catch((e) => {
+                    throw new Error('cannot update the database', e)
+                })
             dispatch(closeModalAction());
         }
-        // console.log(' ------ submitting an item ------ ');
-        // console.log('INITIAL OBJECT', propsSnapshot)
-        // console.log('UPDATED OBJECT', objToSubmit)
-        // console.log('are Objects the same?', isEqual(propsSnapshot ,objToSubmit))
     }
     // html return
     return (
